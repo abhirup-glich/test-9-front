@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   var logo = document.querySelector('.fast-logo');
   if (logo) {
-    var home = buildAbsolute('index.html', PORTS.app);
+    var home = buildAbsolute('index.html' );
     logo.setAttribute('href', home);
     logo.setAttribute('aria-label', 'Go to F.A.S.T. Home');
     logo.addEventListener('click', function (e) {
@@ -87,11 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
   Array.prototype.forEach.call(document.querySelectorAll('a'), function (a) {
     var text = (a.textContent || '').trim().toLowerCase();
     if (text === 'privacy policy') {
-      a.setAttribute('href', buildAbsolute('PrivacyPolicy.html', PORTS.app));
+      a.setAttribute('href', buildAbsolute('PrivacyPolicy.html' ));
     } else if (text === 'terms of service') {
-      a.setAttribute('href', buildAbsolute('TermsOfService.html', PORTS.app));
+      a.setAttribute('href', buildAbsolute('TermsOfService.html' ));
     } else if (text === 'logout') {
-      a.setAttribute('href', buildAbsolute('Loginv2/index.html', PORTS.app));
+      a.setAttribute('href', buildAbsolute('Loginv2/index.html' ));
       a.setAttribute('role', 'button');
       a.addEventListener('click', function (e) {
         e.preventDefault();
