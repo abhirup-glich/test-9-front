@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Attendance - F.A.S.T.</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../assets/shared.css">
+  <link rel="icon" type="image/png" href="/Frontend/frostbyte.png">
+  <script src="../assets/navigation.js" defer></script>
+</head>
+<body class="fast-page fast-enter">
+  <div id="pageLoader" aria-hidden="true"><div class="spinner" role="status" aria-live="polite" aria-label="Loading"></div></div>
+  
+  <div class="main-container">
+    <!-- Animated background blobs -->
+    <div class="bg-blob-1"></div>
+    <div class="bg-blob-2"></div>
+
+    <!-- Floating particles -->
+    <div id="particles"></div>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <div class="content-grid" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        
+        <!-- Welcome / Identify Box -->
+        <div class="auth-section" style="width: 100%; max-width: 500px;">
+          <div class="auth-card">
+            <div class="auth-header">
+              <h2 class="auth-title" id="auth-title">Mark Attendance</h2>
+              <p class="auth-subtitle" id="auth-subtitle">Look at the camera to verify your identity</p>
+            </div>
+
+            <div id="welcome-message-box" class="welcome-box hidden" style="text-align: center; margin-bottom: 20px; padding: 20px; border-radius: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);">
+                <h3 id="welcome-name" style="color: #10b981; margin-bottom: 10px; font-size: 1.5rem;"></h3>
+                <p id="welcome-text" style="color: var(--text-secondary);">Your attendance has been successfully marked.</p>
+                <a href="../Student page/studentoptions.html" style="display: inline-block; margin-top: 15px; color: var(--primary-color); text-decoration: none;">&larr; Back to Options</a>
+            </div>
+
+            <div id="error-message-box" class="welcome-box hidden" style="text-align: center; margin-bottom: 20px; padding: 20px; border-radius: 10px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);">
+                <p id="error-text" style="color: #ef4444;"></p>
+                <button onclick="location.reload()" style="margin-top: 10px; padding: 5px 15px; background: #ef4444; color: white; border: none; border-radius: 5px; cursor: pointer;">Try Again</button>
+            </div>
+
+            <form id="auth-form" class="auth-form" onsubmit="handleIdentify(event)">
+              <button type="submit" class="submit-btn" id="identify-btn">
+                <span class="btn-text">Identify Me</span>
+                <div class="btn-shine"></div>
+              </button>
+            </form>
+            
+            <div id="camera-container" style="margin-top: 20px; border-radius: 15px; overflow: hidden; display: none;">
+                <video id="video" autoplay playsinline style="width: 100%; transform: scaleX(-1);"></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+            </div>
+            
+            <div id="status-msg" style="text-align: center; margin-top: 15px; color: var(--text-secondary); min-height: 20px;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+          <img src="/Frontend/frostbyte.png" alt="FrostByte Logo" class="footer-logo" id="frostbyte-logo" loading="lazy" decoding="async">
+          <span>Created by <strong>FrostByte</strong></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

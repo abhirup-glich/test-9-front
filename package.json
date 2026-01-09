@@ -1,0 +1,13 @@
+{
+  "name": "attendance-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Attendance System",
+  "scripts": {
+    "start": "http-server . -p 3000 -P http://localhost:5000",
+    "build": "echo 'No build step required for static files' && exit 0"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "license": "ISC"
+}

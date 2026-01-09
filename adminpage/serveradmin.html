@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+    Server Admin Dashboard - F.A.S.T.
+    Revised with GetStarted Theme
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/shared.css">
+    <script src="../assets/navigation.js?v=sp1" defer></script>
+    <link rel="stylesheet" href="serveradmin.css">
+    <link rel="icon" type="image/png" href="/Frontend/frostbyte.png">
+</head>
+<body class="fast-page fast-enter">
+    <div class="bg one"></div>
+    <div class="bg two"></div>
+    <div id="pageLoader" aria-hidden="true"><div class="spinner" role="status" aria-live="polite" aria-label="Loading"></div></div>
+    
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; color: var(--dark); font-size: 1.5rem; font-weight: 700;">Register New Student</h2>
+            
+            <div class="form-group">
+                <input type="text" id="regName" placeholder="Full Name (Required)">
+                <input type="text" id="regRoll" placeholder="Roll Number (Required)">
+            </div>
+            <div class="form-group">
+                <input type="text" id="regCourse" placeholder="Course">
+                <input type="email" id="regEmail" placeholder="Organization Email (Required)">
+            </div>
+            <div class="form-group">
+                <input type="password" id="regPassword" placeholder="New Password (Required)">
+            </div>
+
+            <div class="camera-preview">
+                <video id="regVideo" autoplay playsinline muted></video>
+            </div>
+
+            <div class="status-indicators">
+                <span id="statusCenter">Center: ❌</span>
+                <span id="statusLeft">Left: ❌</span>
+                <span id="statusRight">Right: ❌</span>
+            </div>
+
+            <div class="capture-controls">
+                <button id="capCenter" onclick="captureImage('center')">1. Look Straight</button>
+                <button id="capLeft" onclick="captureImage('left')">2. Look Left</button>
+                <button id="capRight" onclick="captureImage('right')">3. Look Right</button>
+            </div>
+
+            <button id="submitRegistration">Register Student</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-shield-alt"></i> Server Admin</h1>
+            <a href="login.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </header>
+
+        <div class="main-content">
+            <div class="action-buttons">
+                <button class="action-btn" id="markAttendanceBtn">
+                    <i class="fas fa-camera"></i>
+                    <h2>Mark Attendance</h2>
+                    <p>Start camera to record attendance</p>
+                </button>
+
+                <button class="action-btn" id="registerStudentBtn">
+                    <i class="fas fa-user-plus"></i>
+                    <h2>Register Student</h2>
+                    <p>Add new students to the database</p>
+                </button>
+
+                <button class="action-btn" id="editDatabaseBtn">
+                    <i class="fas fa-database"></i>
+                    <h2>Database Editor</h2>
+                    <p>Manage existing student records</p>
+                </button>
+            </div>
+
+            <!-- Camera Selection Section -->
+            <div class="camera-selection" id="cameraSelection">
+                <div class="header-with-back" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2>Mark Attendance</h2>
+                    <button id="backFromCameraBtn" class="logout-btn" style="padding: 0.5rem 1rem; width: auto; font-size: 0.9rem; margin: 0; background: var(--blue1); color: white; border-color: var(--blue1);">Back</button>
+                </div>
+                
+                <div class="manual-attendance-section" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                    <h3 style="margin-bottom: 1rem;"><i class="fas fa-edit"></i> Manual Attendance</h3>
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end;">
+                        <div>
+                            <label for="manualCourse" style="display: block; margin-bottom: 5px; font-weight: 500;">Course</label>
+                            <select id="manualCourse" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                                <option value="">Select Course</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="manualStudent" style="display: block; margin-bottom: 5px; font-weight: 500;">Student</label>
+                            <select id="manualStudent" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                        <button id="markManualBtn" style="padding: 10px 20px; background: var(--blue1); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Mark Present</button>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 1rem;"><i class="fas fa-video"></i> AI Attendance (Camera)</h3>
+                <div class="camera-list" id="cameraList">
+                    <!-- Camera options will be populated by JavaScript -->
+                </div>
+                <button class="start-attendance" id="startAttendanceBtn">Start Attendance</button>
+            </div>
+            
+            <!-- Dynamic Content Section for Database/Attendance Tables -->
+            <div id="dynamicContent" style="display: none;"></div>
+        </div>
+
+        <footer>
+            <p>&copy; <span id="copyrightYear"></span> Frostbyte Attendance System. All rights reserved.</p>
+            <div class="quick-links">
+                <a href="../PrivacyPolicy.html">Privacy Policy</a>
+                <a href="../TermsOfService.html">Terms of Service</a>
+                <a href="#">Help Center</a>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Hidden video for recording -->
+    <video id="hiddenVideo" style="display:none;"></video>
+
+    <script type="module" src="serveradmin.js"></script>
+</body>
+</html>

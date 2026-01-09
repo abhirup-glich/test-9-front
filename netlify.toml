@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+  # No build command needed for vanilla HTML/JS, or "npm run build" if you add a build step later.
+  
+[[redirects]]
+  # Redirect all traffic to index.html for client-side routing (if used)
+  # or just let it serve static files.
+  # Since we have specific html files (serveradmin.html, etc.), we might not need SPA redirect
+  # unless we are using a router.
+  # But for clean URLs or fallbacks:
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false  # Only redirect if file doesn't exist
+
+# We don't need API proxy rewrites because we are using absolute URLs in apiEndpoints.js
+# pointing to Render services directly (CORS is enabled on backend).
