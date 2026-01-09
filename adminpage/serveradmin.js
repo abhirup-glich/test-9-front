@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const response = await apiFetch('/register_student', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ name, roll, course, email, password })
+                    body: JSON.stringify({ name, roll_number: roll, course, email, password })
                 });
                 
                 const res = await response.json();
