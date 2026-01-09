@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
             
             try {
-                const response = await apiFetch('', {
+                const response = await apiFetch('/register_student', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ name, roll, course, email, password })
