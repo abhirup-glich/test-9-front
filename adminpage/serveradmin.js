@@ -345,12 +345,12 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const response = await apiFetch('/register_student', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ name, roll_number: roll, course, email, password })
+                    body: JSON.stringify({ name, unique_id: roll, course, email, password })
                 });
                 
                 const res = await response.json();
                 if (response.ok) {
-                    alert(`Student Registered Successfully!\nUnique ID: ${res.unique_id || 'Generated'}`);
+                    alert(`Student Registered Successfully!\nroll_number: ${res.unique_id || 'Generated'}`);
                     if (modal) modal.style.display = 'none';
                     stopRegistrationCamera();
                     // Reset form
