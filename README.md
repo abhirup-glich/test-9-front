@@ -20,3 +20,6 @@ This directory contains the frontend code for the Attendance System.
 - `Loginv2/`: Login page files.
 - `Admin Page/`: Admin dashboard files.
 - `Student page/`: Student dashboard files.
+
+
+Edit access to raunaksahahere
